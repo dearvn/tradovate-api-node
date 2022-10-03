@@ -1,0 +1,29 @@
+{
+  "name": "tradovate-api-node",
+  "version": "1.0.1",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "prepare" : "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dearvn/tradovate-api-node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dearvn/tradovate-api-node/issues"
+  },
+  "homepage": "https://github.com/dearvn/tradovate-api-node#readme",
+  "devDependencies": {
+    "typescript": "^4.8.3"
+  }
+}
