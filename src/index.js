@@ -1,11 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.greet = void 0;
-function greet(name) {
-    console.log('dsdsds');
-    return `Hello ${name}`;
-}
-exports.greet = greet;
+import httpMethods from 'http-client'
+import wsMethods from 'websocket'
 
-greet()
-
+export default (opts = {}) => ({
+  ...httpMethods(opts),
+  ws: wsMethods(opts),
+})
