@@ -154,7 +154,7 @@ const tvGet = async ({
   token = '',
   env = 'demo',
   proxy = ''
-}) => (path, query = {}) => {
+}) => async (path, query = {}) => {
 
   if (!token) {
     throw new Error('You need to pass an token to make authenticated calls.')
@@ -205,7 +205,7 @@ const tvPost = async ({
   token = '',
   env = 'demo',
   proxy = ''
-}) => (path, data = {}, _usetoken = true) => {
+}) => async (path, data = {}, _usetoken = true) => {
 
   if (!token && _usetoken == true) {
     throw new Error('You need to pass an token to make authenticated calls.')
@@ -262,7 +262,7 @@ const placeOrder = async (privPost, payload, url) => {
 }
 
 
-export default opts => {
+export default async (opts) => {
   
   const endpoints = {
     demo: (opts && opts.httpDemo) || DEMO_URL,
@@ -277,8 +277,8 @@ export default opts => {
   const privPost = await tvPost({ ...params, endpoints })
   
   return {
-    accountList: () => await accountList(privGet, '/account/list'),
-    orderList: () => await privGet('/order/list'),
-    placeOrder: payload => await placeOrder(privPost, payload, '/order/placeorder'),
+    accountList: async () => await accountList(privGet, '/account/list'),
+    orderList: async () => await privGet('/order/list'),
+    placeOrder: async (payload) => await placeOrder(privPost, payload, '/order/placeorder'),
   }
 }

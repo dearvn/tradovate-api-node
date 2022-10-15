@@ -421,7 +421,7 @@ const { accessToken } = await connect(credentials)
 
 ////////////////////////////////////
 
-export default opts => {
+export default async (opts) => {
   if (opts && opts.wsBase) {
     endpoints.base = opts.wsBase
   }
