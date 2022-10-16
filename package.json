@@ -1,7 +1,7 @@
 {
   "name": "tradovate-api-node",
-  "version": "0.12.1",
-  "description": "A node API wrapper for Tradovate",
+  "version": "0.12.2",
+  "description": "A node API wrapper for Binance",
   "main": "dist",
   "files": [
     "dist",
@@ -60,7 +60,7 @@
       "!test/utils.js"
     ]
   },
-  "author": "Balthazar Gronon <git@balthazar.dev>",
+  "author": "donaldit",
   "homepage": "https://github.com/dearvn/tradovate-api-node",
   "license": "MIT"
 }
