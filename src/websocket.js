@@ -4,6 +4,14 @@ import JSONbig from 'json-bigint'
 import httpMethods from 'http-client'
 import _openWebSocket from 'open-websocket'
 
+const _sessionStorage = {}
+
+const sessionStorage = {
+  setItem: (key, value) => _sessionStorage[key] = value,
+  getItem: (key) => _sessionStorage[key],
+  removeItem: (key) => delete _sessionStorage[key],
+}
+
 const STORAGE_KEY       = 'tradovate-api-access-token'
 const EXPIRATION_KEY    = 'tradovate-api-access-expiration'
 const DEVICE_ID_KEY     = 'tradovate-device-id'

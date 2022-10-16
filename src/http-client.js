@@ -15,6 +15,14 @@ const USER_DATA_KEY     = 'tradovate-user-data'
 
 const defaultGetTime = () => Date.now()
 
+const _sessionStorage = {}
+
+const sessionStorage = {
+  setItem: (key, value) => _sessionStorage[key] = value,
+  getItem: (key) => _sessionStorage[key],
+  removeItem: (key) => delete _sessionStorage[key],
+}
+
 const setDeviceId = (id) => {
     sessionStorage.setItem(DEVICE_ID_KEY, id)
 }
