@@ -116,7 +116,7 @@ const connect = async ({
     sec:        sec
   }
 
-  const privPost = tvPost({ proxy, endpoints, env })
+  const privPost = await tvPost({ proxy, endpoints, env })
 
   const authResponse = await privPost('/auth/accesstokenrequest', credentials, false)
 
