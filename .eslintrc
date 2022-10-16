@@ -1,0 +1,6 @@
+{
+  "extends": ["zavatta", "prettier"],
+  "rules": {
+    "id-length": 0
+  }
+}
