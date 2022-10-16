@@ -414,11 +414,6 @@ function prepareMessage(raw) {
     return [T, data]
 }
 
-
-const { accessToken } = await connect(credentials)
-
-
-
 ////////////////////////////////////
 
 export default async (opts) => {
