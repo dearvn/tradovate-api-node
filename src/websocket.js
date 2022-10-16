@@ -12,6 +12,10 @@ const sessionStorage = {
   removeItem: (key) => delete _sessionStorage[key],
 }
 
+const DEMO_URL = 'https://demo.tradovateapi.com/v1'
+const LIVE_URL = 'https://live.tradovateapi.com/v1'
+const WS_DEMO_URL = 'wss://demo.tradovateapi.com/v1/websocket'
+
 const STORAGE_KEY       = 'tradovate-api-access-token'
 const EXPIRATION_KEY    = 'tradovate-api-access-expiration'
 const DEVICE_ID_KEY     = 'tradovate-device-id'
@@ -133,7 +137,7 @@ const connect = async ({
         sec:        sec
     }
 
-    const privPost = tvPost({ proxy, endpoints, env })
+    const privPost = await tvPost({ proxy, endpoints, env })
 
     const authResponse = await privPost('/auth/accesstokenrequest', credentials, false)
 
@@ -304,7 +308,7 @@ TradovateSocket.prototype.connect = async function(url, token) {
 
     return new Promise((res, rej) => {
         this.listeningURL = url
-        this.ws = new WebSocket(url)
+        this.ws = _openWebSocket(url)
 
         //long running
         this.ws.addEventListener('message', function onEvents(msg) {
@@ -523,6 +527,12 @@ export default async (opts) => {
   }
 
   const syncSocket = new TradovateSocket({debugLabel: 'sync data'})
+
+  const endpoints = {
+    demo: (opts && opts.httpDemo) || DEMO_URL,
+    live: (opts && opts.httpLive) || LIVE_URL,
+  }
+
 
   const token = await connect({ ...opts, endpoints })
   
