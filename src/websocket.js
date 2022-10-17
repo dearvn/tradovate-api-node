@@ -265,6 +265,7 @@ TradovateSocket.prototype.subscribe = async function({url, body, subscription}) 
         res(async () => {
             removeListener()
             if(cancelUrl && cancelUrl !== '') {
+                console.log(">>>>>>>>>>>>>>>>>>>>>websocket:", cancelUrl)
                 await self.send({ url: cancelUrl, body: cancelBody })
             }
         })
@@ -306,15 +307,24 @@ export default async (opts) => {
     wsLive: (opts && opts.wsLive) || WS_LIVE_URL
   }
 
+  if (!opts.env) {
+    opts.env = 'demo'
+  }
+  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>websocket")
   const token = await connect({ ...opts, endpoints })
   
   const userId = getUserData()['ID']
 
   let wsURL = opts.env === 'demo' ? endpoints.wsDemo : opts.env === 'live' ? endpoints.wsLive : ''        
     
-  await syncSocket.connect(endpoints.wsMd, token)
+  const params = {...opts, token: token}
 
-  const subscribe = await syncSocket.subscribe({
+  const privGet = await tvGet({ ...params, endpoints })
+  const privPost = await tvPost({ ...params, endpoints })
+  
+  //await syncSocket.connect(endpoints.wsMd, token)
+
+  /*const subscribe = await syncSocket.subscribe({
       url: 'user/syncrequest',
       body: { users: [userId] },
       subscription: item => {
@@ -357,9 +367,9 @@ export default async (opts) => {
               console.log(`update event:\n${JSON.stringify(item, null, 2)}`)
           }
       }
-  })
+  })*/
 
   return {
-    subscribe
+    //subscribe
   }
 }

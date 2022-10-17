@@ -55,6 +55,7 @@ export default async (opts) => {
     httpLive: (opts && opts.httpLive) || LIVE_URL,
   }
 
+  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>http-client")
   const token = await connect({ ...opts, endpoints })
 
   const params = {...opts, token: token}

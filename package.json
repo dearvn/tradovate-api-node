@@ -1,6 +1,6 @@
 {
   "name": "tradovate-api-node",
-  "version": "0.12.2",
+  "version": "0.12.18",
   "description": "A node API wrapper for Binance",
   "main": "dist",
   "files": [
