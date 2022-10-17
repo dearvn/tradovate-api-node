@@ -28,17 +28,18 @@ const ORDER_TYPE = {
 }
 
 
-const accountList = async (privGet, url) => {
-  const accounts = await privGet(url)
+const account_list = async (privGet, url) => {
+  console.log(">>>>>>>>>>>>>>>accountList:", url)
+  const accounts = await privGet(url, {'test':'ok'})
 
-  console.log(accounts)
+  console.log("+++++++++++++++++++accounts:", accounts)
 
   setAvailableAccounts(accounts)
 
   return accounts
 }
 
-const placeOrder = async (privPost, payload, url) => {
+const place_order = async (privPost, payload, url) => {
 
   const { id, name } = getAvailableAccounts()[0]
 
@@ -47,6 +48,9 @@ const placeOrder = async (privPost, payload, url) => {
   return res
 }
 
+const info = {
+  tickers: ['NQZ2']
+}
 
 export default async (opts) => {
   
@@ -63,9 +67,14 @@ export default async (opts) => {
   const privGet = await tvGet({ ...params, endpoints })
   const privPost = await tvPost({ ...params, endpoints })
   
+  //const account = await accountList(privGet, '/account/list')
+
+  //console.log("===============", account)
+
   return {
-    accountList: async () => await accountList(privGet, '/account/list'),
+    getInfo: () => info,
+    accountList: async () => await account_list(privGet, '/account/list'),
     orderList: async () => await privGet('/order/list'),
-    placeOrder: async (payload) => await placeOrder(privPost, payload, '/order/placeorder'),
+    placeOrder: async (payload) => await place_order(privPost, payload, '/order/placeorder'),
   }
 }

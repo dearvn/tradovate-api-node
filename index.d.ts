@@ -33,8 +33,12 @@ declare module 'tradovate-api-node' {
     }
     
     export type booleanString = 'true' | 'false'
-  
+    export interface GetInfo {
+
+    }
+
     export interface Tradovate {
+      getInfo(): GetInfo
       accountList(): Promise<Account>
       orderList(options: {}): Promise<QueryOrderResult[]>
       placeOrder(options: NewOrder): Promise<Order>
